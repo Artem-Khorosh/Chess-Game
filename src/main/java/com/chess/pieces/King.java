@@ -18,9 +18,13 @@ public class King extends Piece {
         hasMoved = true;
     }
 
-    // Проверка условий для рокировки
     public boolean canCastle(Board board, Square rookSquare) {
-        // ... логика проверки ...
+        Square kingSquare = board.getSquare(rookSquare.getX(), rookSquare.getY());
+
+        return !hasMoved &&
+                rookSquare.getPiece() instanceof Rook &&
+                !((Rook) rookSquare.getPiece()).hasMoved() &&
+                board.isPathClear(kingSquare, rookSquare);
     }
 
     @Override

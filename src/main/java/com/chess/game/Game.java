@@ -8,13 +8,11 @@ import lombok.Getter;
 
 import java.util.List;
 
-
+@Getter
 public class Game {
-    @Getter
     private final Board board;
     private final Player whitePlayer;
     private final Player blackPlayer;
-    @Getter
     private Player currentPlayer;
 
     public Game() {
@@ -39,11 +37,11 @@ public class Game {
         return isCheckmate(currentPlayer) || isStalemate(currentPlayer);
     }
     private boolean isInCheck(Player player) {
-        Square kingSquare = findKingSquare(player);
+        Square kingSquare = board.findKingSquare(player);
         List<Piece> opponentPieces = player.isWhite() ? blackPlayer.getPieces() : whitePlayer.getPieces();
 
         for (Piece piece : opponentPieces) {
-            Square currentSquare = findPieceSquare(piece);
+            Square currentSquare = board.findPieceSquare(piece);
             if (piece.isValidMove(board, currentSquare, kingSquare)) {
                 return true;
             }
@@ -51,15 +49,7 @@ public class Game {
         return false;
     }
 
-    private Square findKingSquare(Player player) {
-        for (Square square : board.getAllSquares()) {
-            Piece piece = square.getPiece();
-            if (piece instanceof King && piece.isWhite() == player.isWhite()) {
-                return square;
-            }
-        }
-        throw new IllegalStateException("The king has not been found!");
-    }
+
 
     private boolean isCheckmate(Player player) {
         if (!isInCheck(player))
@@ -73,7 +63,7 @@ public class Game {
 
     private boolean hasNoLegalMoves(Player player) {
         for (Piece piece : player.getPieces()) {
-            Square currentSquare = findPieceSquare(piece);
+            Square currentSquare = board.findPieceSquare(piece);
             for (Square square : board.getAllSquares()) {
                 if (piece.isValidMove(board, currentSquare, square)) {
                     return false;
@@ -84,14 +74,6 @@ public class Game {
     }
 
 
-    private Square findPieceSquare(Piece target) {
-        for (Square square : board.getAllSquares()) {
-            if (square.getPiece() == target) {
-                return square;
-            }
-        }
-        throw new IllegalArgumentException("Piece not found on board");
-    }
 
     public static void main(String[] args) {
         Game game = new Game();

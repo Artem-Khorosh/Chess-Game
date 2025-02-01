@@ -16,12 +16,20 @@ public class GameController {
         try (Scanner scanner = new Scanner(System.in)) {
             while (!game.isGameOver()) {
                 System.out.println("Player move: " + (game.getCurrentPlayer().isWhite() ? "White" : "Black"));
+                int x1, y1;
+                do {
                 System.out.print("Enter the starting coordinates (x y):");
-                int x1 = scanner.nextInt();
-                int y1 = scanner.nextInt();
+                 x1 = scanner.nextInt();
+                 y1 = scanner.nextInt();
+                } while (x1 < 0 || x1 > 7 || y1 < 0 || y1 > 7);
+
+                // Ввод конечных координат
+                int x2, y2;
+                do {
                 System.out.print("Enter destination coordinates (x y): ");
-                int x2 = scanner.nextInt();
-                int y2 = scanner.nextInt();
+                 x2 = scanner.nextInt();
+                 y2 = scanner.nextInt();
+                } while (x2 < 0 || x2 > 7 || y2 < 0 || y2 > 7);
 
                 Square start = game.getBoard().getSquare(x1, y1);
                 Square end = game.getBoard().getSquare(x2, y2);

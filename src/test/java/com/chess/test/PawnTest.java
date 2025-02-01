@@ -45,4 +45,11 @@ public class PawnTest {
 
         assertTrue(start.getPiece().isValidMove(board, start, end));
     }
+    @Test
+    void testPawnTwoSquaresMove() {
+        Board board = new Board(new Player(true), new Player(false));
+        Square start = board.getSquare(0, 1);
+        Square end = board.getSquare(0, 3);
+        assertTrue(start.getPiece().isValidMove(board, start, end));
+    }
 }

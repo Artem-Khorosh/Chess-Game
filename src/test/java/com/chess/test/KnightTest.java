@@ -2,18 +2,19 @@ package com.chess.test;
 
 import com.chess.board.Board;
 import com.chess.board.Square;
+import com.chess.game.Player;
 import com.chess.pieces.Knight;
 import com.chess.pieces.Piece;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 public class KnightTest {
     @Test
     public void testKnightMoveLShape() {
-        Board board = new Board();
+        Player whitePlayer = new Player(true);
+        Player blackPlayer = new Player(false);
+        Board board = new Board(whitePlayer, blackPlayer);
         Square start = board.getSquare(1, 0);
         Square end = board.getSquare(2, 2);
         Piece knight = start.getPiece();
@@ -23,7 +24,9 @@ public class KnightTest {
 
     @Test
     public void testKnightInvalidMove() {
-        Board board = new Board();
+        Player whitePlayer = new Player(true);
+        Player blackPlayer = new Player(false);
+        Board board = new Board(whitePlayer, blackPlayer);
         Square start = board.getSquare(1, 0);
         Square end = board.getSquare(3, 1);
         Piece knight = start.getPiece();

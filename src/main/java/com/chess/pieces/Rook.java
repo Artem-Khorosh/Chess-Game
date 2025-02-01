@@ -20,15 +20,16 @@ public class Rook extends Piece {
 
     @Override
     public boolean isValidMove(Board board, Square start, Square end) {
+        if (start == null || end == null) {
+            return false;
+        }
         int x1 = start.getX();
         int y1 = start.getY();
         int x2 = end.getX();
         int y2 = end.getY();
 
         // The rook can move horizontally or vertically
-        if (x1 == x2 || y1 == y2) {
-            return board.isPathClear(start, end);
-        }
-        return false;
+        return (x1 == x2 || y1 == y2) && board.isPathClear(start, end);
+
     }
 }

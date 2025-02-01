@@ -11,6 +11,9 @@ public class Knight extends Piece {
 
     @Override
     public boolean isValidMove(Board board, Square start, Square end) {
+        if (start == null || end == null) {
+            return false;
+        }
         int x1 = start.getX();
         int y1 = start.getY();
         int x2 = end.getX();

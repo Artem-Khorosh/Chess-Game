@@ -11,6 +11,8 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public class ChessGUI extends Application {
+
+
     private Board board;
     private final GridPane gridPane = new GridPane();
 
@@ -50,12 +52,17 @@ public class ChessGUI extends Application {
     }
 
     private String getPieceSymbol(Piece piece) {
-        return piece.getSymbol();
+        if (piece instanceof King) return piece.isWhite() ? "♔" : "♚";
+        if (piece instanceof Queen) return piece.isWhite() ? "♕" : "♛";
+        if (piece instanceof Rook) return piece.isWhite() ? "♖" : "♜";
+        if (piece instanceof Bishop) return piece.isWhite() ? "♗" : "♝";
+        if (piece instanceof Knight) return piece.isWhite() ? "♘" : "♞";
+        if (piece instanceof Pawn) return piece.isWhite() ? "♙" : "♟";
+        return "";
     }
 
     public static void main(String[] args) {
         launch(args);
     }
-
 
 }

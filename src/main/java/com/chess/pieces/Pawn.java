@@ -24,8 +24,8 @@ public class Pawn extends Piece {
         }
 
         // Move forward two squares (only from starting position)
-        if (x1 == x2 && y2 == y1 + 2 * direction && start.getY() == (isWhite() ? 1 : 6) && end.isEmpty()) {
-            return true;
+        if (x1 == x2 && y2 == y1 + 2 * direction && (y1 == 1 || y1 == 6) && end.isEmpty()) {
+            return board.isPathClear(start, end);
         }
 
         // Capture diagonally
